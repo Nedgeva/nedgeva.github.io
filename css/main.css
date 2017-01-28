@@ -1,0 +1,40 @@
+.container img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slogan {
+  font-style: oblique;
+  font-weight: 300;
+}
+
+.slogan:before, .slogan:after {
+  content: "\"";
+}
+
+.display-1, .slogan, .footnote {
+  text-align: center;
+}
+
+.table {
+  margin: 40px 0;
+}
+
+.table th {
+  font-size: 1.7em;
+  line-height: 2em;
+  font-weight: 100;
+  color: #888;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.table th:nth-child(1),
+.table td:nth-child(1),
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  width:15%;
+}

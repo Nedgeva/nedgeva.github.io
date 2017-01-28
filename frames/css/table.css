@@ -1,0 +1,23 @@
+table {
+  width: 320px;
+  border: 1px solid #c3c3c3;
+  border-collapse: collapse;
+}
+table th, table td {
+  border: 1px solid #c3c3c3;
+}
+
+table.head-part {
+  margin-bottom: 0px;
+}
+
+table.body-part {
+  margin-top: -1px;
+}
+
+div.scroll-area {
+  width: 320px;
+  height: 120px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}

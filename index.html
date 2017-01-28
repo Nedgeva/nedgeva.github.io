@@ -1,0 +1,576 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>ezPrintJS demo</title>
+	<!-- styles -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/highlight.min.css">
+	<link rel="stylesheet" href="/css/main.css"></style>
+	<!-- scripts -->
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" crossorigin="anonymous"></script>
+	<script src="/js/highlight.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+
+    <br>
+
+		<img src="/img/logo.png">
+		<h1 class="display-1">ezPrintJS</h1>
+    <h1 class="slogan">Makes every page look better on the paper!</h1>
+
+    <br>
+	
+		<h2>See it in action</h2>
+		<p>Select a demo to see the code example and the result. Please allow window pop-ups if any problems occured</p>
+	
+		<select class="form-control" id="demo-chooser">
+			<option value="simple" selected="selected">Demo 1 — Print certain region of page with id 'first'</option>
+			<option value="callbacks">Demo 2 — Fire callbacks before and after print</option>
+			<option value="expose">Demo 3 — Strip links' hrefs (w/ default template)</option>
+			<option value="customtpl">Demo 4 — Strip links' hrefs (w/ custom template)</option>
+			<option value="keepcss">Demo 5 — Preserve original stylesheets</option>
+			<option value="exclude">Demo 6 — Print excluding certain region of page with class 'links'</option>
+			<option value="watermark">Demo 7 — Print with watermark image</option>
+      <option value="topbottom">Demo 8 — Print page with top and bottom taglines</option>
+      <option value="reveal">Demo 9 — Print page with hidden elements revealed</option>
+      <option value="noimages">Demo 10 — Print page without images, but with placeholders</option>
+      <option value="noinline">Demo 11 — Print without inline styles</option>
+			<option value="canvas">Demo 12 — Print with 2D canvas support</option>
+			<option value="setsize">Demo 13 — Print with forced page size and orientation</option>
+      <option value="table">Demo 14 — Print with expanded scrollable elements</option>
+			<option value="customstyle">Demo 15 — Print with custom styles injected</option>
+			<option value="handlers">Demo 16 — Advanced: print page with custom handlers / content-modification functions</option>
+		</select>
+		
+    <br>
+
+    <h3>Code:</h3>
+    <pre><code id="code-example" class="js"></code></pre>
+
+    <br>
+    <h3>Scroll down the frame and hit "print":</h3>
+
+		<iframe id="demoframe" style="width: 100%" frameborder="0"></iframe>
+	
+		<br>
+		<br>
+	
+		<h2>
+			Description
+		</h2>
+		<p>
+			ezPrintJS is a tiny JavaScript library which allows to make pretty-looking printable pages without the need of modification even single line of existing code in your CSS styles and HTML markup.
+      You are free to precisely customize content your visitors will see on the paper.
+		</p>
+	
+		<br>
+		<br>
+	
+		<h2>
+			Features
+		</h2>
+		<ul>
+			<li>Zero dependencies (add polyfill if you're willing to support outdated browsers)</li>
+			<li>No server-side required (no Selenium, PhantomJS or other apps needed)</li>
+      <li>Compatible with almost all modern browsers</li>
+      <li>Print certain region of page using CSS selectors</li>
+      <li>Hide or show elements on printable pages</li>
+      <li>Expand scrollable areas (useful when printing tables)</li>
+      <li>Print SVG and 2D Canvas objects</li>
+      <li>Add watermark image on page</li>
+      <li>Set header and footer taglines</li>
+			<li>Many options to make your pages look perfect even on the paper</li>
+      <li>Leverage full control on what users will send to printer with custom content handlers</li>
+      <li>Set printable areas as many as you want</li>
+			<li>...and many, many more in only ~13KB library</li>
+		</ul>
+	
+		<br>
+		<br>
+	
+		<h2>
+			Usage
+		</h2>
+		<p>
+			See the minimun example below:
+		</p>
+
+		<pre class='hl'>
+      <code class='html'>
+      &lt;!-- optional: add polyfill BEFORE ezPrintJS if you're willing to support outdated (pre-ES6 era) browsers --&gt;
+      &lt;script src="/path/to/polyfill.min.js"&gt;&lt;/script&gt;
+
+      &lt;!-- include ezPrintJS library... --&gt;
+      &lt;script src="/path/to/ezprintjs.min.js"&gt;&lt;/script&gt;
+  
+      &lt;!-- ...and set trigger to run ezPrintJS in plain JavaScript... --&gt;
+      &lt;script&gt;
+        document.querySelector('#myPrintButton').addEventListener('click', function() {
+          ezPrintJS({
+            target: '#myContentID',
+            // any combination of other options. See examples and docs!
+          })
+        })
+      &lt;/script&gt;
+
+      &lt;!-- ...or even shorter with jQuery --&gt;
+      &lt;script&gt;
+        $('#myPrintButton').click(function() {
+          ezPrintJS({
+            target: '#myContentID',
+            // any combination of other options. See examples and docs!
+          })
+        })
+      &lt;/script&gt;
+      </code>
+    </pre>
+	
+		<br>
+		<br>
+	
+		<h2>Options</h2>
+		<br>
+		<div class="card">
+			<div class="card-block">
+				<table class="table">
+					<tr>
+						<th>Option</th>
+						<th>Data type</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>
+							target
+						</td>
+						<td><code>string</code></td>
+						<td>
+							<p>
+								The only required parameter. 'Target' should be valid CSS selector.
+							</p>
+							<p>
+								Forbidden target tags are:
+							</p>
+							<div>
+                  <code class="html">'LINK', 'TITLE', 'HEAD', 'META', 'BASE', 'BASEFONT', 'SCRIPT', 'STYLE', 'NOSCRIPT', 'APPLET'</code>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							setPrintSize
+						</td>
+						<td><code>string</code></td>
+						<td>
+							<p>
+                Page size and orientation. See more at:
+              </p>
+              <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@page/size">https://developer.mozilla.org/en-US/docs/Web/CSS/@page/size</a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							beforePrintCb
+						</td>
+						<td><code>function</code></td>
+						<td>
+							Callback function, fires before new window will be created. No arguments will be passed
+						</td>
+					</tr>
+					<tr>
+						<td>
+							afterPrintCb
+						</td>
+						<td><code>function</code></td>
+						<td>
+							Callback function, fires after print is done or cancelled. No arguments will be passed
+						</td>
+					</tr>
+					<tr>
+						<td>
+							exposeLinkUrls
+						</td>
+						<td><code>string</code></td>
+						<td>
+							<p>
+								Extract link href and append it to link title
+							</p>
+							<p>
+								Valid values are:
+							</p>
+							<ul>
+								<li>
+									<code>'all'</code> - expose all hrefs
+								</li>
+								<li>
+									<code>'external'</code> - expose hrefs from links that points to another host only
+								</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							linkTextTemplate
+						</td>
+						<td><code>string</code></td>
+						<td>
+							<p>
+								String template for link title extraction, needs '{title}' and '{url}'. Effective only with 'exposeLinkUrls' option enabled
+							</p>
+							<p>
+								Default template: <code>'{title} [{url}]'</code>
+							</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							keepSourceCSS
+						</td>
+						<td><code>boolean</code></td>
+						<td>
+							Preserve original style/link tags on printing page
+						</td>
+					</tr>
+					<tr>
+						<td>
+							watermarkImageURL
+						</td>
+						<td><code>string</code></td>
+						<td>
+							URL for watermark image. Image will be centered and printed on every page with opacity set to 0.25
+						</td>
+					</tr>
+          <tr>
+            <td>
+              headerText
+            </td>
+            <td><code>string</code></td>
+            <td>
+              Text for top tagline. Not recommended for multipage prints due overlapping
+            </td>
+          </tr>
+          <tr>
+            <td>
+              footerText
+            </td>
+            <td><code>string</code></td>
+            <td>
+              Text for bottom tagline. Not recommended for multipage prints due overlapping
+            </td>
+          </tr>
+          <tr>
+            <td>
+              revealHiddenElements
+            </td>
+            <td><code>boolean</code></td>
+            <td>
+              Reset 'display' option for elements with style set to 'display: none;'. Especially useful for printing tabbed content
+            </td>
+          </tr>
+          <tr>
+            <td>
+              printCanvas
+            </td>
+            <td><code>boolean</code></td>
+            <td>
+              Try to capture and print 2D content of <code>canvas</code> elements
+            </td>
+          </tr>
+          <tr>
+            <td>
+              extendScrollableAreas
+            </td>
+            <td><code>boolean|string</code></td>
+            <td>
+              <p>
+                Expands vertical scrollable elements
+              </p>
+              <p>
+                Valid values are:
+              </p>
+              <ul>
+                <li>
+                  <code>true</code> - expand all vertical scrollable elements
+                </li>
+                <li>
+                  <code>'table'</code> - try to guess and expand only scrollable tables
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              scrollableAreasMaxHeight
+            </td>
+            <td><code>number</code></td>
+            <td>
+              Limit maximum height (in pixels) of expanded scrollable elements. Effective only with 'extendScrollableAreas' option enabled
+            </td>
+          </tr>
+          <tr>
+            <td>
+              excludeSelectorList
+            </td>
+            <td><code>array</code></td>
+            <td>
+              <p>
+                Array of CSS selectors for unwanted elements. Target elements will be hidden in printable page.
+              </p>
+              <p>
+                Note: this option has higher priority over 'revealHiddenElements'
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              removeInlineStyles
+            </td>
+            <td><code>boolean</code></td>
+            <td>
+              Clean element's inline style
+            </td>
+          </tr>
+          <tr>
+            <td>
+              removeImages
+            </td>
+            <td><code>boolean</code></td>
+            <td>
+              Correctly removes images on printing page by replacing them with bordered (1px thickness) squares
+            </td>
+          </tr>
+          <tr>
+            <td>
+              injectCustomStyle
+            </td>
+            <td><code>string</code></td>
+            <td>
+              Inject any custom styles in printable page. See 'Demo 15' for more info 
+            </td>
+          </tr>
+          <tr>
+            <td>
+              customMethodMap
+            </td>
+            <td><code>object</code></td>
+            <td>
+              <p>
+                Most interesting option.
+              </p>
+              <p>
+                This option allows you to take full control over content that user will print
+              </p>
+              <p>
+                Object 'customMethodMap' should contain tag name as key, and array of functions as value
+              </p>
+              <p>
+                Let's say we wish modify all (or some) content wrapped in 'span' and 'figure' tags, then our 'customMethodMap' object will look like:
+              </p>
+              <p>
+                <code>
+                  {
+                    'span': [fn1, fn2, ... fnN],
+                    'figure': [fn1, fn2, ... fnN]
+                  }
+                </code>
+              </p>
+              <p>
+                Rules are dead-simple:
+              </p>
+              <ul>
+                <li>
+                  use <code>'*'</code> as tag name if you want to pass handlers for every element
+                </li>
+                <li>
+                  every function will receive only one argument - current matched element, every function should return this element
+                </li>
+                <li>
+                  functions executed in chain sequence order just like middlewares in Express framework, so next function will receive result of previous function (see 'Demo 16')
+                </li>
+                <li>
+                  <code>this</code> keyword inside functions is bound to options you passed to ezPrintJS, so no ES6 arrow functions are allowed
+                </li>
+              </ul>
+            </td>
+          </tr>
+				</table>
+			</div>
+		</div>
+	
+		<br>
+	 
+    <p class="footnote">
+      Made by Nedgeva. 2017
+    </p>
+	</div>
+
+	<script>
+		'use strict';
+
+		var codes = {
+			simple: "ezPrintJS({\n\
+  target: '#first'\n\
+})",
+      callbacks: "ezPrintJS({\n\
+  target: '#first',\n\
+  beforePrintCb: function() {alert('Custom cb called before print')},\n\
+  afterPrintCb: function() {alert('Custom cb called after print')}\n\
+})",
+      expose: "ezPrintJS({\n\
+  target: '#first',\n\
+  exposeLinkUrls: 'all' // or 'external' for stripping external-host links only\n\
+})",
+      customtpl: "ezPrintJS({\n\
+  target: '#first',\n\
+  exposeLinkUrls: 'all', // or 'external' for stripping external-host links only\n\
+  linkTextTemplate: '{title} -> {url}'\n\
+})",
+      keepcss: "ezPrintJS({\n\
+  target: '#first',\n\
+  keepSourceCSS: true\n\
+})",
+      exclude: "ezPrintJS({\n\
+  target: '#first',\n\
+  excludeSelectorList: ['.links']\n\
+})",
+      watermark: "ezPrintJS({\n\
+  target: '#first',\n\
+  watermarkImageURL: 'path/to/img/watermark.png'\n\
+})",
+      topbottom: "// please note: printing with top and bottom taglines not recommended on multiple pages due overlapping\n\
+ezPrintJS({\n\
+  target: '#first',\n\
+  headerText: 'Printed with ezPrintJS',\n\
+  footerText: 'CALL-ME-777-888-TEST'\n\
+})",
+      reveal: "ezPrintJS({\n\
+  target: '#first',\n\
+  revealHiddenElements: true\n\
+})",
+      noimages: "ezPrintJS({\n\
+  target: '#first',\n\
+  removeImages: true\n\
+})",
+      noinline: "ezPrintJS({\n\
+  target: '#first',\n\
+  removeInlineStyles: true\n\
+})",
+      canvas: "ezPrintJS({\n\
+  target: '#first',\n\
+  printCanvas: true\n\
+})",
+      setsize: "ezPrintJS({\n\
+  target: '#first',\n\
+  setPrintSize: 'A4 landscape' // may not work in all browsers\n\
+})",
+      table: "ezPrintJS({\n\
+  target: '#first',\n\
+  keepSourceCSS: true, // optional, set to try preserve original page look\n\
+  extendScrollableAreas: true, // set to 'table' to expand tables only\n\
+  scrollableAreasMaxHeight: 250 // optional: limit height (in px) of scrollable areas\n\
+})",
+      customstyle: "// set zero-margins to print page\n\
+// set line-through on all links\n\
+// set custom text before and after first paragraph\n\
+var css = '@page {margin-left: 0px; margin-right: 0px; margin-top: 0px; margin-bottom: 0px; margin: 0px;}'\n\
++ ' a {text-decoration: line-through;}'\n\
++ ' #first p:before {content: \"This text was prepended via ezPrintJS option <---\";}'\n\
++ ' #first p:after {content: \"---> This text was appended via ezPrintJS option\";}';\n\
+\n\
+ezPrintJS({\n\
+  target: '#first',\n\
+  injectCustomStyle: css\n\
+})",
+      handlers: "// replace every odd character in link title\n\
+function replaceOddChars(el) {\n\
+  el.textContent = el.textContent.split('')\n\
+    .reduce(function(str, char, i) {\n\
+      return i % 2\n\
+        ? str + '*' + char + '*'\n\
+        : str + char\n\
+    }, '')\n\
+  return el\n\
+}\n\
+\n\
+// transform text to upper case\n\
+function capitalizeLetters(el) {\n\
+  el.textContent = el.textContent.toUpperCase()\n\
+  return el\n\
+}\n\
+\n\
+ezPrintJS({\n\
+  target: '#first',\n\
+  // pass object, where key property is tag name and value is array of functions\n\
+  // functions will be called in a chain sequence: fn1(el) -el-> fn2(el) -el-> fn3(el) ...\n\
+  customMethodMap: {\n\
+    'a': [\n\
+      replaceOddChars,\n\
+      capitalizeLetters\n\
+    ]\n\
+  }\n\
+})"
+		}
+		
+		function frameLoader(e) {
+			// http://www.christersvensson.com/html-tool/iframe.htm
+
+			// get context
+			var doc = e.target.contentDocument
+				? e.target.contentDocument
+				: e.target.contentWindow.document
+
+			var body = doc.body
+			var html = doc.documentElement
+
+			// get max height
+			var height = Math.max(
+				body.scrollHeight, 
+				body.offsetHeight, 
+				html.clientHeight, 
+				html.scrollHeight, 
+				html.offsetHeight 
+			)
+
+			// set height
+			e.target.style.height = height + 10 + 'px'
+			e.target.style.visibility = 'visible'
+		}
+
+		function runDemo(i) {
+			// change demo code in code-example section
+			$('#code-example').html(codes[i]);
+			hljs.highlightBlock($('#code-example')[0])
+
+			var frame = $('#demoframe')[0]
+			var src = '/frames/' + i + '.html'
+
+			// reset style and set source
+			frame.style.visibility = 'hidden'
+			frame.style.height = '10px'
+			frame.src = src
+
+			// pass frame to frame loadr
+			frame.onload = frameLoader
+		}
+
+		$(function () {
+			$('.hl code').each(function (i, el) {
+				hljs.highlightBlock(el)
+			})
+			
+			runDemo('simple');
+
+			$('#demo-chooser').change(function () {
+				runDemo($(this).val())
+			})
+			
+			$('#demo-chooser').focus()
+
+		})
+	</script>
+</body>
+</html>

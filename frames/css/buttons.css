@@ -1,0 +1,24 @@
+.printButtons {
+}
+
+.printButton {
+  font-size: 100%;
+  padding: .5em 1em;
+  color: #444;
+  border: 1px solid #999;
+  background-color: #E6E6E6;
+  text-decoration: none;
+  border-radius: 2px;
+  display: inline-block;
+  zoom: 1;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: sans-serif;
+}
