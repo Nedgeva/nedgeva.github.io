@@ -53,7 +53,7 @@ function print(e) {
     
     watermark: {
       target: '#first',
-      watermarkImageURL: 'http://localhost:9000/frames/img/watermark.png'
+      watermarkImageURL: 'https://nedgeva.github.io/frames/img/watermark.png'
     },
 
     topbottom: {
