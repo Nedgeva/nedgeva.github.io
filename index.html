@@ -404,7 +404,7 @@
 		<br>
 	 
     <p class="footnote">
-      Made by Nedgeva. 2017
+      Made by Nedgeva. 2017 Buy at <a href="https://codecanyon.net/item/ezprintjs-simplify-page-printing/19379841?ref=Nedgeva">CodeCanyon</a>
     </p>
 	</div>
 
@@ -558,6 +558,7 @@ ezPrintJS({\n\
 		}
 
 		$(function () {
+
 			$('.hl code').each(function (i, el) {
 				hljs.highlightBlock(el)
 			})
@@ -567,6 +568,11 @@ ezPrintJS({\n\
 			$('#demo-chooser').change(function () {
 				runDemo($(this).val())
 			})
+
+      $(window).on('resize', function onResize() {
+        var demoId = $('#demo-chooser').val()
+        runDemo(demoId)
+      })
 			
 			$('#demo-chooser').focus()
 
