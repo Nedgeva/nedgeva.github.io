@@ -1,0 +1,191 @@
+@import url(https://fonts.googleapis.com/css?family=Cookie);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css);
+
+/* set of styles for bottom progress bar */
+hr.fhshowcase-progress {
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  height: 2px;
+}
+
+.fhshowcase-anim {
+  z-index: 1;
+  height: 2px;
+  background: #ff1aa2;
+  pointer-events: none;
+}
+
+.fhshowcase-anim.active {
+  z-index: 2;
+  opacity: 0;
+}
+
+/* 500px icon in upper left corner */
+.fhshowcase-mainlink {
+  position: absolute;
+  font-size: 30px;
+  color: #fff;
+  padding: 1% 1%;
+  z-index: 10;
+}
+
+.fhshowcase-mainlink a {
+  color: inherit;
+  line-height: 0;
+}
+
+/* author's avatar in upper right corner */
+.fhshowcase-avatar {
+  position: absolute;
+  padding: 1% 1%;
+  z-index: 10;
+}
+
+.fhshowcase-avatar img {
+  width: 30px;
+  height: 30px;
+}
+
+.fhshowcase-avatar-image-wrapper {
+  display: inline-block;
+  box-shadow: 0 1px 2px rgba(0,0,0,.42);
+  border-radius: 100%;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.fhshowcase-avatar a {
+  color: inherit;
+  line-height: 0;
+}
+
+/* profile card */
+/* originally taken from */
+/* https://codepen.io/genarocolusso/pen/xONEXg */
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,400";
+
+.fhshowcase-profile-badgescard, .fhshowcase-profile-firstinfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.fhshowcase-profile-content {
+  display: none;
+  animation: animatop 0.9s cubic-bezier(0.425, 1.14, 0.47, 1.125) forwards;
+  z-index: 11;
+}
+
+.fhshowcase-profile-card {
+  width: 500px;
+  min-height: 100px;
+  padding: 20px;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.fhshowcase-profile-card:after {
+  content: '';
+  display: block;
+  width: 190px;
+  height: 300px;
+  background: cadetblue;
+  position: absolute;
+  animation: rotatemagic 0.75s cubic-bezier(0.425, 1.04, 0.47, 1.105) 1s both;
+}
+
+.fhshowcase-profile-badgescard {
+  padding: 10px 20px;
+  border-radius: 3px;
+  background-color: #ECECEC;
+  width: 480px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  z-index: -1;
+  left: 10px;
+  top: 0px;
+  /*bottom: 10px;*/
+  animation: animainfos 0.5s cubic-bezier(0.425, 1.04, 0.47, 1.105) 0.75s forwards;
+}
+
+.fhshowcase-profile-badgescard a {
+  font-size: 1.6em;
+  margin: 0px 6px;
+  opacity: 0.6;
+  color: black;
+}
+
+.fhshowcase-profile-firstinfo {
+  flex-direction: row;
+  z-index: 2;
+  position: relative;
+}
+
+.fhshowcase-profile-firstinfo img {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+}
+
+.fhshowcase-profile-firstinfo .fhshowcase-profile-profileinfo {
+  padding: 0px 20px;
+}
+
+.fhshowcase-profile-firstinfo .fhshowcase-profile-profileinfo h1 {
+  font-size: 1.8em;
+}
+
+.fhshowcase-profile-firstinfo .fhshowcase-profile-profileinfo h3 {
+  font-size: 1.2em;
+  color: #009688;
+  font-style: italic;
+}
+
+.fhshowcase-profile-firstinfo .fhshowcase-profile-profileinfo p.bio {
+  padding: 10px 0px;
+  color: #5A5A5A;
+  line-height: 1.2;
+  font-style: initial;
+}
+
+@keyframes animatop {
+  0% {
+    opacity: 0;
+    bottom: -600px;
+  }
+  100% {
+    opacity: 1;
+    bottom: 0px;
+  }
+}
+
+@keyframes animainfos {
+  0% {
+    top: 500px;
+  }
+  100% {
+    top: 155px;
+  }
+}
+
+@keyframes rotatemagic {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg);
+    top: -24px;
+    left: -253px;
+  }
+  100% {
+    transform: rotate(-30deg);
+    top: -24px;
+    left: -78px;
+  }
+}

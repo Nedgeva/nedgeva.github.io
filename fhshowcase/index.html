@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Condensed" rel="stylesheet">
+  <!-- required assets -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/owl.theme.default.min.css">
+  <!-- demo assets -->
+  <link rel="stylesheet" href="css/demo.css">
+  <title>Five Hundred Showcase</title>
+</head>
+<body>
+
+  <header class="banner">
+    <div class="leftslogan">
+      <div class="fhname">
+        FHShowcase
+      </div>
+      <div>
+        Amazing slideshow for your 500px gallery
+      </div>
+    </div>
+    <div class="logo">
+      <img src="img/logo.png" alt="">
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- controls pane -->
+    <div class="pane">
+      <div class="control">
+        <select id="switchoption">
+          <option value="username">Get photos by username</option>
+          <option value="gallery">Get photos from a gallery</option>
+          <option value="search">Get photos from search results</option>
+        </select>
+        <div class="inputs">
+          <label for="username">Username</label>
+          <input type="text" id="username" value="dageo">
+        </div>
+        <div class="center">
+          <button id="run">Make gallery!</button>
+        </div>
+        <div class="hidden invisible">
+          <hr>
+          <label for="switchsize">Image size</label>
+          <!-- https://github.com/500px/api-documentation/blob/master/basics/formats_and_terms.md#image-urls-and-image-sizes -->
+          <select id="switchsize">
+            <option value="1">70px x 70px</option>
+            <option value="2">140px x 140px</option>
+            <option value="3">280px x 280px</option>
+            <option value="100">100px x 100px</option>
+            <option value="200">200px x 200px</option>
+            <option value="440" selected>440px x 440px</option>
+            <option value="600">600px x 600px</option>
+            <option value="4">900px on the longest edge</option>
+            <option value="5">1170px on the longest edge</option>
+            <option value="6">1080px high</option>
+            <option value="20">300px high</option>
+            <option value="21">600px high</option>
+            <option value="30">256px on the longest edge</option>
+            <option value="31">450px high</option>
+            <option value="1080">1080px on the longest edge</option>
+            <option value="1600">1600px on the longest edge</option>
+            <option value="2048">2048px on the longest edge</option>
+          </select>
+          <div class="inputs">
+            <label for="imgquantity">Quantity</label>
+            <input type="number" id="imgquantity" value="25">
+          </div>
+          <div class="inputs">
+            <label for="gallerywidth">Width</label>
+            <input type="text" id="gallerywidth" value="440px">
+          </div>
+          <div class="inputs">
+            <label for="timeout">Duration, ms</label>
+            <input type="text" id="timeout" value="5000">
+          </div>
+          <div class="inputs">
+            <label for="lazyload">Enable lazy load</label>
+            <input type="checkbox" id="lazyload" class="features" checked>
+          </div>
+          <div class="inputs">
+            <label for="fhIcon">Show 500px icon</label>
+            <input type="checkbox" id="fhIcon" class="features" checked>
+          </div>
+          <div class="inputs">
+            <label for="fhAvatar">Show user pic</label>
+            <input type="checkbox" id="fhAvatar" class="features" checked>
+          </div>
+          <div class="inputs">
+            <label for="fhProfile">Show profile card</label>
+            <input type="checkbox" id="fhProfile" class="features" checked>
+          </div>
+          <div class="inputs">
+            <label for="fhProgressBar">Show progress bar</label>
+            <input type="checkbox" id="fhProgressBar" class="features" checked>
+          </div>
+        </div>  
+        <div class="showmo">
+          <div class="toggle out"><i class="fa fa-angle-double-down" aria-hidden="true"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- gallery pane -->
+    <div class="pane">
+      <div class="gallery">
+        <div class="loader" id="loader-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="banner">
+    <div class="credits credits-nedgeva center">
+      Made with 
+        <i class="fa fa-heart-o" aria-hidden="true"></i>
+      by Nedgeva
+        <a href="https://codecanyon.net/user/nedgeva/portfolio" target="_blank">
+          <img src="img/nedgeva_logo.png" alt="">
+        </a>
+      <hr>
+      <div class="credits-owl center">
+        <a href="https://owlcarousel2.github.io/OwlCarousel2/" target="_blank">Based on Owl Carousel 2</a>
+      </div>
+    </div>
+  </footer>
+  <!-- recommended, but not required JS polyfill file -->
+  <script src="js/polyfill.min.js"></script>
+  <!-- required JS files -->
+  <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+  <!-- demo script -->
+  <script src="js/demo.js"></script>
+</body>
+</html>
