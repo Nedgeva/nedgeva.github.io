@@ -8,6 +8,11 @@ function print(e) {
     simple: {
       target: '#first'
     },
+
+    simpleFrame: {
+      target: '#first',
+      printInIframe: true
+    },
     
     beforePrintCb: {
       target: '#first',
@@ -53,7 +58,8 @@ function print(e) {
     
     watermark: {
       target: '#first',
-      watermarkImageURL: 'https://nedgeva.github.io/frames/img/watermark.png'
+      watermarkImageURL: 'http://localhost:9000/frames/img/watermark.png',
+      watermarkOpacity: 0.5
     },
 
     topbottom: {
@@ -80,6 +86,12 @@ function print(e) {
     canvas: {
       target: '#first',
       printCanvas: true
+    },
+
+    canvasFrame: {
+      target: '#first',
+      printCanvas: true,
+      printInIframe: true
     },
 
     setsize: {
