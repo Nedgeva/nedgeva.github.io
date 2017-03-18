@@ -34,7 +34,7 @@
           <h1>jQuery Simple Sync Scrollr</h1>
           <h4>Tiny jQuery plugin which allows scroll multiple scrollable areas of the page synchronously.</h4>
           <a href="https://codecanyon.net/item/jquery-simple-sync-scrollr/19486551?ref=Nedgeva" class="hero-button">Buy & Download at Codecanyon.net</a> 
-          <p>v1.1.0</p>
+          <p>v1.2.0</p>
         </div>
         <div class="large-4 medium-4 columns">
           <img class="jss-logo" src="img/jsss-logo.png" alt="jQuery Simple Sync Scrollr logo">
@@ -49,9 +49,13 @@
           <h3>Demo</h3>
           <p class="center">Simply start scrolling any pane and you'll see how others will scroll automatically. Synchronously.</p>
           <p class="center">Choose option to sync scroll position by</p>
-          <div class="center" action="">
+          <div class="center">
             <input type="radio" name="option" value="container" checked> outer container height/width
-            <input type="radio" name="option" value="content"> inner content (nearest visible if it exists)
+            <input type="radio" name="option" value="content"> inner content (nearest visible block)
+            <input type="radio" name="option" value="contentNext"> inner content (next visible block)
+          </div>
+          <div id="syncoption" class="center">
+            <input type="checkbox"> Scroll inner content blocks synchronously
           </div>
           <!-- Demo will be attached here -->
         </div>
@@ -100,7 +104,7 @@
             </div>
             <div class="medium-8 small-12 columns">
               <h2>Lightweight and Fast</h2>
-              <p>Size of minified jQSSS plugin is only ~4.5KB! Lightning fast speed even with dozens of scrollable panes. </p>
+              <p>Size of minified jQSSS plugin is only ~5KB! Lightning fast speed even with dozens of scrollable panes. </p>
             </div>
           </section>
           <section class="row feature">
